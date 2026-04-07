@@ -91,14 +91,14 @@ function PricingCard({ tier, price, hours, features, blurb, isPopular, beamFrom,
         display: "flex",
         flexDirection: "column",
         background: isPopular
-          ? "rgba(74,222,128,0.04)"
-          : "rgba(255,255,255,0.035)",
+          ? "rgba(5, 5, 5, 0.80)"
+          : "rgba(5, 5, 5, 0.75)",
         border: isPopular
           ? "1px solid rgba(74,222,128,0.28)"
-          : "1px solid rgba(255,255,255,0.08)",
+          : "1px solid rgba(255,255,255,0.10)",
         boxShadow: isPopular
-          ? "0 8px 40px rgba(0,0,0,0.35), 0 0 60px rgba(74,222,128,0.07), inset 0 1px 0 rgba(255,255,255,0.08)"
-          : "0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)",
+          ? "0 8px 40px rgba(0,0,0,0.5), 0 0 60px rgba(74,222,128,0.07), inset 0 1px 0 rgba(255,255,255,0.06)"
+          : "0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04)",
         transform: `translateY(${yOffset || 0}px)`,
         transition: "box-shadow 0.2s ease",
       }}
