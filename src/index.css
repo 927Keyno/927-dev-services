@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg2: #111111;
+  --color-green: #4ade80;
+  --color-cyan: #00e5ff;
+  --color-green-glow: rgba(74, 222, 128, 0.3);
+  --color-cyan-glow: rgba(0, 229, 255, 0.25);
+  --color-panel-bg: rgba(10, 10, 10, 0.40);
+  --color-panel-border: rgba(255, 255, 255, 0.12);
+  --color-card-bg: rgba(255, 255, 255, 0.04);
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.55);
+  --color-text-dim: rgba(255, 255, 255, 0.35);
+
+  --animate-border-beam: border-beam calc(var(--duration)*1s) infinite linear;
+  --animate-shiny-text: shiny-text 8s infinite;
+  --animate-background-position-spin: background-position-spin 3000ms infinite alternate;
+}
+
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+  }
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+  }
+}
+
+@keyframes background-position-spin {
+  0% { background-position: top center; }
+  100% { background-position: bottom center; }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(160deg, #0a0a0a 0%, #111111 100%);
+  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+a, button, [role="button"] {
+  cursor: none;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
