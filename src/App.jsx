@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Background3D } from "@/components/ui/Background3D"
+import cursorImg from "@/assets/927-cursor-lg.png"
 import { BorderBeam } from "@/components/ui/BorderBeam"
 import { ShinyText } from "@/components/ui/ShinyText"
 import { HyperText } from "@/components/ui/HyperText"
@@ -313,10 +314,16 @@ function SectionLabel({ children, color }) {
 
 export default function App() {
   const [booted, setBooted] = useState(false)
-  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 })
+  const cursorRef = useRef(null)
 
   useEffect(() => {
-    const move = (e) => setCursorPos({ x: e.clientX, y: e.clientY })
+    const move = (e) => {
+      if (cursorRef.current) {
+        cursorRef.current.style.left = `${e.clientX - 48}px`
+        cursorRef.current.style.top = `${e.clientY - 48}px`
+        cursorRef.current.style.opacity = '0.85'
+      }
+    }
     window.addEventListener('mousemove', move)
     return () => window.removeEventListener('mousemove', move)
   }, [])
@@ -333,21 +340,22 @@ export default function App() {
       }}
     >
       {/* JS Cursor follower — 96px 927 logo */}
-      <div
+      <img
+        ref={cursorRef}
+        src={cursorImg}
+        alt=""
+        draggable={false}
         style={{
           position: 'fixed',
-          left: cursorPos.x - 48,
-          top: cursorPos.y - 48,
+          left: -100,
+          top: -100,
           width: 96,
           height: 96,
-          backgroundImage: `url(${import.meta.env.BASE_URL}927-cursor-lg.png)`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
           pointerEvents: 'none',
           zIndex: 9999,
-          transition: 'transform 0.08s ease-out',
           filter: 'drop-shadow(0 0 12px rgba(0,229,255,0.3))',
-          opacity: 0.85,
+          opacity: 0,
+          userSelect: 'none',
         }}
       />
 

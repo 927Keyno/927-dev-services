@@ -40,20 +40,23 @@
   100% { background-position: bottom center; }
 }
 
-body {
+body, body * {
   margin: 0;
   padding: 0;
+  cursor: none !important;
+}
+
+body {
   background: linear-gradient(160deg, #0a0a0a 0%, #111111 100%);
   background-attachment: fixed;
   font-family: Arial, sans-serif;
   color: #ffffff;
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: none;
 }
 
-a, button, [role="button"] {
-  cursor: none;
+canvas {
+  cursor: none !important;
 }
 
 ::-webkit-scrollbar { width: 6px; }
