@@ -80,7 +80,7 @@ function FeatureItem({ text, accent }) {
 
 // ─── Pricing Card ─────────────────────────────────────────────────────────────
 
-function PricingCard({ tier, price, hours, features, blurb, isPopular, beamFrom, beamTo, yOffset }) {
+function PricingCard({ tier, price, hours, features, blurb, excludes, isPopular, beamFrom, beamTo, yOffset }) {
   return (
     <TiltCard
       style={{
@@ -191,6 +191,23 @@ function PricingCard({ tier, price, hours, features, blurb, isPopular, beamFrom,
       >
         {blurb}
       </div>
+
+      {excludes && (
+        <div style={{
+          fontSize: 11,
+          color: "rgba(255,255,255,0.3)",
+          fontFamily: "Consolas, 'Courier New', monospace",
+          marginBottom: 20,
+          padding: "8px 12px",
+          background: "rgba(255,255,255,0.02)",
+          borderRadius: 6,
+          border: "1px solid rgba(255,255,255,0.04)",
+          textShadow: "0 1px 6px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,0.5)",
+          lineHeight: 1.5,
+        }}>
+          {excludes}
+        </div>
+      )}
 
       <a
         href="https://discord.gg/hRZeHwWyHG"
@@ -520,19 +537,21 @@ export default function App() {
                 >
                   <PricingCard
                     tier="Support & Maintenance"
-                    price="$450 – $600/mo"
-                    hours="12 – 18 hrs/month"
+                    price="$450 – $500/mo"
+                    hours="12 – 16 hrs/month"
                     yOffset={0}
                     beamFrom="#00e5ff"
                     beamTo="#0066ff"
                     features={[
-                      "Bug fixes and script troubleshooting",
-                      "Performance tuning and optimization",
-                      "Minor feature additions",
-                      "Script updates & compatibility patches",
-                      "Priority response (within 24 hrs)",
+                      "Script debugging & crash/log analysis",
+                      "Performance optimization & tuning",
+                      "Configuration adjustments",
+                      "Framework integration (ESX, QBox, OX)",
+                      "Minor UI/NUI adjustments",
+                      "Security review & server stability",
                     ]}
-                    blurb="Best for servers that already know what they're doing and just need a lead developer to step in from time to time."
+                    blurb="Best for servers that already know what they're doing and just need a real developer to step in when something breaks or needs optimizing."
+                    excludes="Excludes: mapping, custom systems, weapons, textures, or 3D asset work."
                   />
                 </motion.div>
 
@@ -545,21 +564,22 @@ export default function App() {
                 >
                   <PricingCard
                     tier="Developer"
-                    price="$600 – $750/mo"
+                    price="$650 – $750/mo"
                     hours="24 – 30 hrs/month"
                     isPopular
                     yOffset={0}
                     beamFrom="#4ade80"
                     beamTo="#00e5ff"
                     features={[
-                      "Everything in Support & Maintenance",
                       "Custom script development",
-                      "Database design & optimization",
-                      "UI/NUI development",
-                      "Framework integration (ESX/QBCore/QBox)",
-                      "Bi-weekly progress reports",
+                      "System integration & database work",
+                      "Weapon balancing & texture edits",
+                      "Map merging & placement (YMAP/IPL/collisions)",
+                      "Housing offsets & NUI/UI customization",
+                      "Optimization & exploit prevention",
                     ]}
-                    blurb="Best suited for servers requiring ongoing development, semi-regular builds, and a reliable developer."
+                    blurb="For servers that want an active developer building, fixing, and improving systems on a regular basis — not just putting out fires."
+                    excludes="Limits: No MLOs from scratch, no heavy 3D modeling, no full framework rewrites."
                   />
                 </motion.div>
 
@@ -578,17 +598,15 @@ export default function App() {
                     beamFrom="#fbbf24"
                     beamTo="#ff6b00"
                     features={[
-                      "Everything in Developer Tier",
-                      "Full server architecture & setup",
-                      "Team code reviews & mentoring",
-                      "Multi-resource system design",
-                      "Server launch/rebrand support",
-                      "Performance audits & scaling",
-                      "Weekly progress reports",
-                      "Direct communication channel",
-                      "Staging server testing before deployment",
+                      "Full system design (phones, banks, admin, gangs, jobs)",
+                      "Advanced optimization & profiling",
+                      "Security architecture & exploit prevention",
+                      "Weapon systems & asset streaming optimization",
+                      "Custom UI frameworks",
+                      "Server architecture planning",
                     ]}
-                    blurb="The works — the full dev team experience for servers launching, rebranding, or scaling."
+                    blurb="For servers that want me acting as their main developer and technical lead — handling complex systems, performance, and long-term architecture."
+                    excludes="Excludes: MLO creation from scratch."
                   />
                 </motion.div>
               </div>
@@ -608,7 +626,7 @@ export default function App() {
                   textShadow: "0 1px 6px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,0.5)",
                 }}
               >
-                all tiers · month-to-month · no long-term contracts
+                all tiers · payment in advance · hours reset monthly · no MLOs from scratch
               </motion.div>
             </motion.section>
 
@@ -661,27 +679,27 @@ export default function App() {
                 <div style={{ marginTop: 16 }} />
 
                 <TerminalLine delay={0.2}>
-                  <span style={{ color: "rgba(255,255,255,0.4)" }}>PROJECT_MANAGEMENT  </span>
+                  <span style={{ color: "rgba(255,255,255,0.4)" }}>TASK_TRACKING       </span>
+                  <span style={{ color: "rgba(255,255,255,0.6)" }}>= ClickUp          </span>
+                  <span style={{ color: "#4ade80", textShadow: "0 0 10px rgba(74,222,128,0.4)" }}>[EXCLUSIVE]</span>
+                </TerminalLine>
+
+                <TerminalLine delay={0.32}>
+                  <span style={{ color: "rgba(255,255,255,0.4)" }}>PRIORITIES          </span>
                   <span style={{ color: "rgba(255,255,255,0.6)" }}>= ClickUp          </span>
                   <span style={{ color: "#4ade80", textShadow: "0 0 10px rgba(74,222,128,0.4)" }}>[ACTIVE]</span>
                 </TerminalLine>
 
-                <TerminalLine delay={0.32}>
-                  <span style={{ color: "rgba(255,255,255,0.4)" }}>VERSION_CONTROL     </span>
-                  <span style={{ color: "rgba(255,255,255,0.6)" }}>= GitHub           </span>
-                  <span style={{ color: "#4ade80", textShadow: "0 0 10px rgba(74,222,128,0.4)" }}>[ACTIVE]</span>
-                </TerminalLine>
-
                 <TerminalLine delay={0.44}>
-                  <span style={{ color: "rgba(255,255,255,0.4)" }}>CODE_DOCUMENTATION  </span>
-                  <span style={{ color: "rgba(255,255,255,0.6)" }}>= comprehensive    </span>
+                  <span style={{ color: "rgba(255,255,255,0.4)" }}>TIMELINES           </span>
+                  <span style={{ color: "rgba(255,255,255,0.6)" }}>= ClickUp          </span>
                   <span style={{ color: "#4ade80", textShadow: "0 0 10px rgba(74,222,128,0.4)" }}>[ACTIVE]</span>
                 </TerminalLine>
 
                 <TerminalLine delay={0.56}>
-                  <span style={{ color: "rgba(255,255,255,0.4)" }}>STAGING_TESTING     </span>
-                  <span style={{ color: "rgba(255,255,255,0.6)" }}>= pre-deployment   </span>
-                  <span style={{ color: "#fbbf24", textShadow: "0 0 10px rgba(251,191,36,0.4)" }}>[TIER 3 ONLY]</span>
+                  <span style={{ color: "rgba(255,255,255,0.4)" }}>AVAILABILITY        </span>
+                  <span style={{ color: "rgba(255,255,255,0.6)" }}>= contracted       </span>
+                  <span style={{ color: "#fbbf24", textShadow: "0 0 10px rgba(251,191,36,0.4)" }}>[NOT ON-CALL]</span>
                 </TerminalLine>
 
                 <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
@@ -696,7 +714,7 @@ export default function App() {
                   padding: "12px 14px",
                   background: "rgba(255,255,255,0.025)",
                   borderRadius: 8,
-                  border: "1px solid rgba(5,5,5,0.80)",
+                  border: "1px solid rgba(255,255,255,0.05)",
                   display: "flex",
                   alignItems: "flex-start",
                   gap: 10,
@@ -710,7 +728,7 @@ export default function App() {
                     lineHeight: 1.6,
                     textShadow: "0 1px 8px rgba(0,0,0,0.95), 0 0 16px rgba(0,0,0,0.5)",
                   }}>
-                    Every task tracked in ClickUp with full transparency — you always know what's in progress, what's done, and what's next.
+                    I operate as a contracted developer, not on-call staff. Communication is professional, scheduled, and efficient. Issues are logged in ClickUp, discussed as needed, and resolved within your tier's response times.
                   </span>
                 </div>
               </div>
@@ -812,23 +830,23 @@ export default function App() {
                 </TerminalLine>
 
                 <TerminalLine delay={0.5}>
-                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  FIRST_MONTH    </span>
-                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= 50% deposit upfront</span>
+                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  PAYMENT_DUE    </span>
+                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= in advance, before work begins</span>
                 </TerminalLine>
 
                 <TerminalLine delay={0.58}>
-                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  ONGOING        </span>
-                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= full payment before work begins</span>
+                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  HOURS          </span>
+                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= do not roll over</span>
                 </TerminalLine>
 
                 <TerminalLine delay={0.66}>
-                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  BILLING        </span>
-                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= month-to-month (no contracts)</span>
+                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  SCOPE          </span>
+                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= limited to selected tier</span>
                 </TerminalLine>
 
                 <TerminalLine delay={0.74}>
-                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  SCOPE_CHANGES  </span>
-                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= may adjust monthly rate</span>
+                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  PLANNING       </span>
+                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= coordinated through ClickUp</span>
                 </TerminalLine>
               </div>
             </motion.section>
