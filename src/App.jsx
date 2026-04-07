@@ -858,7 +858,7 @@ export default function App() {
                   marginBottom: 16,
                   fontFamily: "Consolas, 'Courier New', monospace",
                 }}>
-                  // tech stack
+                  // what I bring
                 </div>
 
                 <p style={{
@@ -869,7 +869,7 @@ export default function App() {
                   margin: "0 0 24px",
                   textShadow: "0 2px 12px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.6)",
                 }}>
-                  Full-stack FiveM development across every major framework.
+                  One developer. Every skill your server needs.
                 </p>
 
                 <div style={{
@@ -878,8 +878,14 @@ export default function App() {
                   justifyContent: "center",
                   gap: 10,
                 }}>
-                  {["ESX", "QBCore", "QBox", "ox_inventory", "ox_lib", "MySQL", "NUI / React", "Full-Stack Lua"].map((tech) => (
-                    <span key={tech} style={{
+                  {[
+                    "Lua Scripting", "JavaScript", "React / NUI", "MySQL / Database",
+                    "ESX", "QBCore", "QBox", "ox_inventory", "ox_lib",
+                    "YMAP / IPL Mapping", "Collision Editing", "Weapon Balancing",
+                    "Texture Editing", "Asset Streaming", "Housing Offsets",
+                    "Server Architecture", "Security / Anti-Exploit", "Performance Profiling",
+                  ].map((skill) => (
+                    <span key={skill} style={{
                       fontSize: 12,
                       fontFamily: "Consolas, 'Courier New', monospace",
                       color: "rgba(0,229,255,0.7)",
@@ -890,7 +896,7 @@ export default function App() {
                       textShadow: "0 0 10px rgba(0,229,255,0.2)",
                       letterSpacing: "0.05em",
                     }}>
-                      {tech}
+                      {skill}
                     </span>
                   ))}
                 </div>
