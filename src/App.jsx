@@ -340,7 +340,7 @@ export default function App() {
           top: cursorPos.y - 48,
           width: 96,
           height: 96,
-          backgroundImage: 'url(/927-cursor-lg.png)',
+          backgroundImage: `url(${import.meta.env.BASE_URL}927-cursor-lg.png)`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           pointerEvents: 'none',
@@ -405,7 +405,7 @@ export default function App() {
 
               {/* Logo */}
               <motion.img
-                src="/927-logo.png"
+                src={`${import.meta.env.BASE_URL}927-logo.png`}
                 alt="927"
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -964,7 +964,7 @@ export default function App() {
               {/* Footer tagline */}
               <div style={{ marginTop: 64, display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
                 <img
-                  src="/927-logo.png"
+                  src={`${import.meta.env.BASE_URL}927-logo.png`}
                   alt="927"
                   style={{
                     height: 32,
