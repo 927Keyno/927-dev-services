@@ -80,7 +80,7 @@ function FeatureItem({ text, accent }) {
 
 // ─── Pricing Card ─────────────────────────────────────────────────────────────
 
-function PricingCard({ tier, price, hours, features, blurb, excludes, isPopular, beamFrom, beamTo, yOffset }) {
+function PricingCard({ tier, price, features, blurb, excludes, isPopular, beamFrom, beamTo, yOffset }) {
   return (
     <TiltCard
       style={{
@@ -156,19 +156,7 @@ function PricingCard({ tier, price, hours, features, blurb, excludes, isPopular,
         {price}
       </div>
 
-      <div
-        style={{
-          fontSize: 12,
-          color: "rgba(255,255,255,0.35)",
-          marginBottom: 18,
-          textShadow: "0 1px 4px rgba(0,0,0,0.7)",
-          fontFamily: "Consolas, 'Courier New', monospace",
-        }}
-      >
-        {hours}
-      </div>
-
-      <ul style={{ margin: 0, padding: 0, flex: 1 }}>
+      <ul style={{ margin: 0, padding: 0, flex: 1, marginTop: 18 }}>
         {features.map((f, i) => (
           <FeatureItem key={i} text={f} accent={isPopular ? "#4ade80" : "#00e5ff"} />
         ))}
@@ -538,7 +526,6 @@ export default function App() {
                   <PricingCard
                     tier="Support & Maintenance"
                     price="$450 – $500/mo"
-                    hours="12 – 16 hrs/month"
                     yOffset={0}
                     beamFrom="#00e5ff"
                     beamTo="#0066ff"
@@ -550,7 +537,7 @@ export default function App() {
                       "Minor UI/NUI adjustments",
                       "Security review & server stability",
                     ]}
-                    blurb="Best for servers that already know what they're doing and just need a real developer to step in when something breaks or needs optimizing."
+                    blurb="Your server stays running. When something breaks, needs optimizing, or needs a second set of eyes — I step in and handle it."
                     excludes="Excludes: mapping, custom systems, weapons, textures, or 3D asset work."
                   />
                 </motion.div>
@@ -565,7 +552,6 @@ export default function App() {
                   <PricingCard
                     tier="Developer"
                     price="$650 – $750/mo"
-                    hours="24 – 30 hrs/month"
                     isPopular
                     yOffset={0}
                     beamFrom="#4ade80"
@@ -578,7 +564,7 @@ export default function App() {
                       "Housing offsets & NUI/UI customization",
                       "Optimization & exploit prevention",
                     ]}
-                    blurb="For servers that want an active developer building, fixing, and improving systems on a regular basis — not just putting out fires."
+                    blurb="Active development every month. Systems get built, improved, and maintained — not just fires put out. One developer, consistent quality."
                     excludes="Limits: No MLOs from scratch, no heavy 3D modeling, no full framework rewrites."
                   />
                 </motion.div>
@@ -593,7 +579,6 @@ export default function App() {
                   <PricingCard
                     tier="Lead Developer"
                     price="$1,000 – $1,200/mo"
-                    hours="45 – 60 hrs/month"
                     yOffset={0}
                     beamFrom="#fbbf24"
                     beamTo="#ff6b00"
@@ -605,7 +590,7 @@ export default function App() {
                       "Custom UI frameworks",
                       "Server architecture planning",
                     ]}
-                    blurb="For servers that want me acting as their main developer and technical lead — handling complex systems, performance, and long-term architecture."
+                    blurb="I'm your technical lead. Complex systems, long-term architecture, performance — the full picture. Same developer on everything, no handoffs."
                     excludes="Excludes: MLO creation from scratch."
                   />
                 </motion.div>
@@ -626,7 +611,7 @@ export default function App() {
                   textShadow: "0 1px 6px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,0.5)",
                 }}
               >
-                all tiers · payment in advance · hours reset monthly · no MLOs from scratch
+                all tiers · 50% first month · full payment ongoing · scope per tier
               </motion.div>
             </motion.section>
 
@@ -830,13 +815,13 @@ export default function App() {
                 </TerminalLine>
 
                 <TerminalLine delay={0.5}>
-                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  PAYMENT_DUE    </span>
-                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= in advance, before work begins</span>
+                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  FIRST_MONTH    </span>
+                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= 50% deposit upfront</span>
                 </TerminalLine>
 
                 <TerminalLine delay={0.58}>
-                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  HOURS          </span>
-                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= do not roll over</span>
+                  <span style={{ color: "rgba(255,255,255,0.3)" }}>  ONGOING        </span>
+                  <span style={{ color: "rgba(255,255,255,0.55)" }}>= full payment in advance</span>
                 </TerminalLine>
 
                 <TerminalLine delay={0.66}>
