@@ -879,11 +879,10 @@ export default function App() {
                   gap: 10,
                 }}>
                   {[
-                    "Lua Scripting", "JavaScript", "React / NUI", "MySQL / Database",
-                    "ESX", "QBCore", "QBox", "ox_inventory", "ox_lib",
-                    "YMAP / IPL Mapping", "Collision Editing", "Weapon Balancing",
-                    "Texture Editing", "Asset Streaming", "Housing Offsets",
-                    "Server Architecture", "Security / Anti-Exploit", "Performance Profiling",
+                    "Custom Scripts", "Server Optimization", "Database Management",
+                    "Weapon Balancing", "Clothing Development", "3D Assets",
+                    "Custom Mapping", "UI / Menu Design", "Security & Anti-Exploit",
+                    "Framework Setup", "Texture Work", "Server Architecture",
                   ].map((skill) => (
                     <span key={skill} style={{
                       fontSize: 12,
