@@ -28,6 +28,7 @@ export function SplitText({
   duration = 0.7,
   start = "top 85%",
   once = true,
+  style = {},
 }) {
   const wrapperRef = useRef(null)
 
@@ -74,7 +75,7 @@ export function SplitText({
   }, [children])
 
   return (
-    <Tag ref={wrapperRef} className={className}>
+    <Tag ref={wrapperRef} className={className} style={style}>
       {children}
     </Tag>
   )

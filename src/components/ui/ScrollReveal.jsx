@@ -19,6 +19,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 export function ScrollReveal({
   children,
   className = "",
+  style = {},
   direction = "up",
   distance = 40,
   delay = 0,
@@ -62,7 +63,7 @@ export function ScrollReveal({
   }, [])
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} style={style}>
       {children}
     </div>
   )
