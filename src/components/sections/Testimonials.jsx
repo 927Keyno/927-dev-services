@@ -1,7 +1,8 @@
-import { TestimonialCard } from "@/components/ui/TestimonialCard"
+import { MagicCard } from "@/components/ui/magic-card"
+import { BorderBeam } from "@/components/ui/border-beam"
 import { Spotlight } from "@/components/ui/spotlight"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
-import { SplitText } from "@/components/ui/SplitText"
+import { HyperText } from "@/components/ui/hyper-text"
 
 const TESTIMONIALS = [
   {
@@ -23,23 +24,43 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="snap-section relative py-24 overflow-hidden flex flex-col justify-center">
-      <Spotlight className="-top-20 right-0 md:right-40" size={500} />
+    <section id="testimonials" className="snap-section relative flex flex-col justify-center overflow-hidden py-8">
+      <Spotlight className="-top-20 right-0 md:right-10" size={400} />
 
       <div className="px-8">
         <ScrollReveal>
-          <p className="text-sm font-medium tracking-widest uppercase text-[var(--color-accent)] mb-4">
+          <span className="text-xs font-medium tracking-widest uppercase text-[var(--color-accent)] mb-4 block">
             What They Say
-          </p>
+          </span>
         </ScrollReveal>
-        <SplitText tag="h2" className="text-3xl md:text-4xl font-bold mb-12">
-          Client Testimonials
-        </SplitText>
+        <HyperText
+          className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-8"
+          duration={1000}
+          startOnView
+        >
+          TESTIMONIALS
+        </HyperText>
 
-        <div className="grid grid-cols-1 gap-6">
+        <div className="flex flex-col gap-4">
           {TESTIMONIALS.map((t, i) => (
-            <ScrollReveal key={i} delay={i * 0.15}>
-              <TestimonialCard {...t} />
+            <ScrollReveal key={i} delay={i * 0.1}>
+              <MagicCard className="p-5 relative" gradientSize={200}>
+                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-3 italic">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-[rgba(147,51,234,0.2)] flex items-center justify-center">
+                    <span className="text-xs font-bold text-[var(--color-accent)]">
+                      {t.name.charAt(0)}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-[var(--color-text-primary)]">{t.name}</p>
+                    <p className="text-[10px] text-[var(--color-accent)]">{t.server}</p>
+                  </div>
+                </div>
+                <BorderBeam size={40} duration={10} colorFrom="#9333ea" colorTo="#7c3aed" />
+              </MagicCard>
             </ScrollReveal>
           ))}
         </div>

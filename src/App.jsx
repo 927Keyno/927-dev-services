@@ -13,6 +13,8 @@ import cursorImg from "@/assets/927-cursor-lg.png"
 
 export default function App() {
   const cursorRef = useRef(null)
+  const scrollRef = useRef(null)
+  const robotRef = useRef(null)
 
   // Custom cursor
   useEffect(() => {
@@ -23,6 +25,23 @@ export default function App() {
     }
     window.addEventListener("mousemove", onMove, { passive: true })
     return () => window.removeEventListener("mousemove", onMove)
+  }, [])
+
+  // Robot scroll reaction
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+
+    const onScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = container
+      const progress = scrollTop / (scrollHeight - clientHeight)
+      if (robotRef.current) {
+        robotRef.current.style.transform = `translateY(${progress * 50 - 25}px)`
+      }
+    }
+
+    container.addEventListener("scroll", onScroll, { passive: true })
+    return () => container.removeEventListener("scroll", onScroll)
   }, [])
 
   return (
@@ -39,7 +58,7 @@ export default function App() {
 
       <div className="flex h-screen pt-16">
         {/* Left — Snap-scroll content */}
-        <div className="w-full md:w-[55%] h-full overflow-y-auto scroll-container">
+        <div ref={scrollRef} data-scroll-container className="w-full md:w-[55%] h-full overflow-y-auto scroll-container">
           <Hero />
           <Services />
           <Pricing />
@@ -51,7 +70,7 @@ export default function App() {
         </div>
 
         {/* Right — Fixed 3D Robot */}
-        <div className="hidden md:flex w-[45%] h-full items-center justify-center relative bg-[var(--color-base)]">
+        <div ref={robotRef} className="hidden md:flex w-[45%] h-full items-center justify-center relative bg-[var(--color-base)] transition-transform duration-300 ease-out">
           <SplineScene
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
             className="w-full h-full"

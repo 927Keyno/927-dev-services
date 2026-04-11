@@ -1,51 +1,22 @@
-import { Suspense, lazy } from "react"
-import { useInView } from "@/hooks/useInView"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
-import { GlassCard } from "@/components/ui/GlassCard"
-import { cn } from "@/lib/utils"
+import { MagicCard } from "@/components/ui/magic-card"
+import { BorderBeam } from "@/components/ui/border-beam"
 
-const SharedCanvas = lazy(() =>
-  import("@/components/three/SharedCanvas").then((m) => ({ default: m.SharedCanvas }))
-)
-
-export function ServiceRow({ title, description, ThreeScene, index }) {
-  const [ref, inView] = useInView({ threshold: 0.2 })
-
+export function ServiceRow({ title, description, index }) {
   return (
-    <div ref={ref} className="snap-section py-12 flex flex-col justify-center">
-      {/* 3D Scene */}
-      <div className="h-[250px] mb-6 rounded-lg overflow-hidden">
-        <ScrollReveal>
-          {inView && ThreeScene ? (
-            <Suspense
-              fallback={
-                <div className="w-full h-full rounded-lg bg-[rgba(20,20,20,0.5)] animate-pulse" />
-              }
-            >
-              <SharedCanvas>
-                <ThreeScene />
-              </SharedCanvas>
-            </Suspense>
-          ) : (
-            <div className="w-full h-full rounded-lg bg-[rgba(20,20,20,0.5)] animate-pulse" />
-          )}
-        </ScrollReveal>
-      </div>
-
-      {/* Content */}
-      <ScrollReveal delay={0.1}>
-        <GlassCard className="p-6">
-          <span className="text-xs font-mono text-[var(--color-accent)] mb-2 block">
+    <ScrollReveal delay={index * 0.05}>
+      <MagicCard className="p-4 relative" gradientSize={200}>
+        <div className="flex items-start gap-3">
+          <span className="text-xs font-mono text-[var(--color-accent)] px-2 py-0.5 rounded border border-[rgba(147,51,234,0.3)] bg-[rgba(147,51,234,0.1)] flex-shrink-0">
             0{index + 1}
           </span>
-          <h3 className="text-xl md:text-2xl font-bold text-[var(--color-text-primary)] mb-3">
-            {title}
-          </h3>
-          <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
-            {description}
-          </p>
-        </GlassCard>
-      </ScrollReveal>
-    </div>
+          <div>
+            <h3 className="text-base font-bold text-[var(--color-text-primary)] mb-1">{title}</h3>
+            <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">{description}</p>
+          </div>
+        </div>
+        <BorderBeam size={60} duration={10} />
+      </MagicCard>
+    </ScrollReveal>
   )
 }

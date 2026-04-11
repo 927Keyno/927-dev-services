@@ -74,16 +74,13 @@ export function Navbar() {
           >
             Scripts
           </a>
-        </div>
-
-        <div className="hidden md:block">
           <a
             href="https://discord.gg/hRZeHwWyHG"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2 text-sm font-medium rounded-lg bg-[var(--color-accent)] text-white hover:shadow-[0_0_20px_rgba(147,51,234,0.4)] transition-shadow"
+            className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
           >
-            Get a Quote
+            Discord
           </a>
         </div>
 
@@ -121,9 +118,9 @@ export function Navbar() {
             href="https://discord.gg/hRZeHwWyHG"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2 text-sm font-medium rounded-lg bg-[var(--color-accent)] text-white text-center"
+            className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
           >
-            Get a Quote
+            Discord
           </a>
         </div>
       )}

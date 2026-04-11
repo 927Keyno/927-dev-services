@@ -1,7 +1,8 @@
 import { Suspense, lazy } from "react"
 import { useInView } from "@/hooks/useInView"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
-import { SplitText } from "@/components/ui/SplitText"
+import { HyperText } from "@/components/ui/hyper-text"
+import { MagicCard } from "@/components/ui/magic-card"
 
 const SharedCanvas = lazy(() =>
   import("@/components/three/SharedCanvas").then((m) => ({ default: m.SharedCanvas }))
@@ -14,15 +15,26 @@ export function About() {
   const [ref, inView] = useInView({ threshold: 0.2 })
 
   return (
-    <section id="about" className="snap-section relative py-24 flex flex-col justify-center" ref={ref}>
+    <section id="about" className="snap-section relative flex flex-col justify-center py-8" ref={ref}>
       <div className="px-8">
-        {/* 3D Logo — compact */}
-        <div className="h-[250px] mb-8 rounded-lg overflow-hidden">
+        <ScrollReveal>
+          <span className="text-xs font-medium tracking-widest uppercase text-[var(--color-accent)] mb-4 block">
+            Who We Are
+          </span>
+        </ScrollReveal>
+        <HyperText
+          className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6"
+          duration={1000}
+          startOnView
+        >
+          BUILT BY DEVS
+        </HyperText>
+
+        {/* 3D Logo inline */}
+        <div className="h-[180px] mb-6 rounded-xl overflow-hidden">
           {inView && (
             <Suspense
-              fallback={
-                <div className="w-full h-full rounded-lg bg-[rgba(20,20,20,0.5)] animate-pulse" />
-              }
+              fallback={<div className="w-full h-full bg-[rgba(20,20,20,0.5)] animate-pulse rounded-xl" />}
             >
               <SharedCanvas>
                 <Logo927 />
@@ -31,41 +43,26 @@ export function About() {
           )}
         </div>
 
-        <ScrollReveal>
-          <p className="text-sm font-medium tracking-widest uppercase text-[var(--color-accent)] mb-4">
-            Who We Are
-          </p>
-        </ScrollReveal>
-
-        <SplitText tag="h2" className="text-3xl md:text-4xl font-bold mb-6">
-          Built by Devs Who Run Servers
-        </SplitText>
-
         <ScrollReveal delay={0.2}>
-          <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
-            927 Development isn&apos;t just a dev shop — we run our own production servers.
-            Every script we build gets battle-tested on live servers with real players
-            before it ever touches your codebase. We don&apos;t ship code we wouldn&apos;t run ourselves.
-          </p>
-        </ScrollReveal>
-
-        <ScrollReveal delay={0.3}>
-          <p className="text-[var(--color-text-secondary)] leading-relaxed mb-8">
-            From custom scripts to full server builds, we bring the perspective of
-            server owners who understand what players actually need — not just what
-            looks good in a demo.
-          </p>
-        </ScrollReveal>
-
-        <ScrollReveal delay={0.4}>
-          <a
-            href="https://discord.gg/hRZeHwWyHG"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[var(--color-accent)] hover:text-[var(--color-text-primary)] transition-colors font-medium"
-          >
-            Join the Community &rarr;
-          </a>
+          <MagicCard className="p-6" gradientSize={200}>
+            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">
+              927 Development isn&apos;t just a dev shop — we run our own production servers.
+              Every script gets battle-tested on live servers with real players
+              before it touches your codebase.
+            </p>
+            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">
+              From custom scripts to full server builds, we bring the perspective of
+              server owners who understand what players actually need.
+            </p>
+            <a
+              href="https://discord.gg/hRZeHwWyHG"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-[var(--color-accent)] hover:text-[var(--color-text-primary)] transition-colors font-medium"
+            >
+              Join the Community &rarr;
+            </a>
+          </MagicCard>
         </ScrollReveal>
       </div>
     </section>
