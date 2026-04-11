@@ -1,18 +1,9 @@
 // src/components/ui/Counter.jsx
-import { useEffect, useRef } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useRef, useState, useEffect } from "react"
 
 /**
  * Animated number counter — counts from 0 to target when scrolled into view.
- *
- * Props:
- *   target    — number to count to (e.g. 600)
- *   duration  — animation duration in seconds (default 2)
- *   prefix    — string before number (default "")
- *   suffix    — string after number (default "")
- *   className — class on the outer span
- *   start     — ScrollTrigger start position (default "top 85%")
+ * Uses IntersectionObserver + requestAnimationFrame (no GSAP dependency).
  */
 export function Counter({
   target,
@@ -20,40 +11,52 @@ export function Counter({
   prefix = "",
   suffix = "",
   className = "",
-  start = "top 85%",
 }) {
   const ref = useRef(null)
+  const [value, setValue] = useState(0)
+  const [started, setStarted] = useState(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
 
-    const obj = { value: 0 }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          setStarted(true)
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [started])
 
-    const ctx = gsap.context(() => {
-      gsap.to(obj, {
-        value: target,
-        duration,
-        ease: "power2.out",
-        roundProps: "value",
-        onUpdate: () => {
-          el.textContent = `${prefix}${obj.value.toLocaleString()}${suffix}`
-        },
-        scrollTrigger: {
-          trigger: el,
-          start,
-          toggleActions: "play none none none",
-        },
-      })
-    }, el)
+  useEffect(() => {
+    if (!started) return
 
-    return () => ctx.revert()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target])
+    const startTime = performance.now()
+    const durationMs = duration * 1000
+
+    const animate = (now) => {
+      const elapsed = now - startTime
+      const progress = Math.min(elapsed / durationMs, 1)
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setValue(Math.round(eased * target))
+
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+
+    requestAnimationFrame(animate)
+  }, [started, target, duration])
 
   return (
     <span ref={ref} className={className}>
-      {prefix}0{suffix}
+      {prefix}{value.toLocaleString()}{suffix}
     </span>
   )
 }

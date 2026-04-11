@@ -15,7 +15,7 @@ const SOCIAL_LINKS = [
 export function Footer() {
   return (
     <footer className="border-t border-[rgba(147,51,234,0.1)] bg-[var(--color-base)]">
-      <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div className="px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="text-lg font-bold">
           <span className="text-[var(--color-accent)]">927</span>
           <span className="text-[var(--color-text-secondary)]"> Development</span>

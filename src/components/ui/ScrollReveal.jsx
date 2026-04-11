@@ -1,69 +1,63 @@
 // src/components/ui/ScrollReveal.jsx
-import { useEffect, useRef } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useRef, useState, useEffect } from "react"
+import { cn } from "@/lib/utils"
 
 /**
  * Wrapper that fades/slides children in when scrolled into view.
+ * Uses IntersectionObserver + CSS transitions (no GSAP dependency).
  *
  * Props:
  *   children   — any React children
  *   className  — class applied to wrapper div
  *   direction  — "up" | "down" | "left" | "right" (default "up")
- *   distance   — pixels to travel (default 40)
  *   delay      — delay in seconds (default 0)
- *   duration   — animation duration (default 0.8)
- *   start      — ScrollTrigger start (default "top 85%")
- *   once       — only play once (default true)
+ *   style      — inline styles
  */
 export function ScrollReveal({
   children,
   className = "",
-  style = {},
   direction = "up",
-  distance = 40,
   delay = 0,
-  duration = 0.8,
-  start = "top 85%",
-  once = true,
+  style = {},
 }) {
   const ref = useRef(null)
-
-  const getFromVars = () => {
-    const base = { opacity: 0 }
-    switch (direction) {
-      case "up":    return { ...base, y: distance }
-      case "down":  return { ...base, y: -distance }
-      case "left":  return { ...base, x: distance }
-      case "right": return { ...base, x: -distance }
-      default:      return { ...base, y: distance }
-    }
-  }
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
 
-    const ctx = gsap.context(() => {
-      gsap.from(el, {
-        ...getFromVars(),
-        duration,
-        delay,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start,
-          toggleActions: once ? "play none none none" : "play none none reverse",
-        },
-      })
-    }, el)
-
-    return () => ctx.revert()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
+  const transforms = {
+    up: "translateY(30px)",
+    down: "translateY(-30px)",
+    left: "translateX(-30px)",
+    right: "translateX(30px)",
+  }
+
   return (
-    <div ref={ref} className={className} style={style}>
+    <div
+      ref={ref}
+      className={cn(className)}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translate(0)" : transforms[direction],
+        transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`,
+        ...style,
+      }}
+    >
       {children}
     </div>
   )

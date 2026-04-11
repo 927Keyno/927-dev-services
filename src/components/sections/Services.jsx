@@ -39,24 +39,27 @@ const SERVICES = [
 
 export function Services() {
   return (
-    <section id="services" className="section relative py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="services" className="relative">
+      {/* Services header — its own snap section */}
+      <div className="snap-section flex flex-col justify-center px-8 py-16">
         <ScrollReveal>
-          <p className="text-sm font-medium tracking-widest uppercase text-[var(--color-accent)] mb-4 text-center">
+          <p className="text-sm font-medium tracking-widest uppercase text-[var(--color-accent)] mb-4">
             What We Do
           </p>
         </ScrollReveal>
-        <SplitText tag="h2" className="text-4xl md:text-5xl font-bold text-center mb-16">
+        <SplitText tag="h2" className="text-3xl md:text-4xl font-bold">
           Services
         </SplitText>
+      </div>
 
+      {/* Each service is its own snap section */}
+      <div className="px-8">
         {SERVICES.map((service, i) => (
           <ServiceRow
             key={service.title}
             title={service.title}
             description={service.description}
             ThreeScene={service.Scene}
-            reverse={i % 2 !== 0}
             index={i}
           />
         ))}

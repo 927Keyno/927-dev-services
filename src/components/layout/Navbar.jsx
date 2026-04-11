@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils"
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
+  { label: "Pricing", href: "#pricing" },
   { label: "Stats", href: "#stats" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "About", href: "#about" },
@@ -13,9 +14,24 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
+    // Listen on both window and the left scroll container
+    const onScroll = () => {
+      const container = document.querySelector('[data-scroll-container]')
+      const scrollTop = container ? container.scrollTop : window.scrollY
+      setScrolled(scrollTop > 50)
+    }
     window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
+    // Also listen on the scroll container once it mounts
+    const timer = setTimeout(() => {
+      const container = document.querySelector('[data-scroll-container]')
+      if (container) container.addEventListener("scroll", onScroll, { passive: true })
+    }, 100)
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      clearTimeout(timer)
+      const container = document.querySelector('[data-scroll-container]')
+      if (container) container.removeEventListener("scroll", onScroll)
+    }
   }, [])
 
   const handleClick = (e, href) => {

@@ -89,6 +89,23 @@ body::before {
   background: rgba(147, 51, 234, 0.6);
 }
 
+/* ─── Left panel: hidden scrollbar + snap scroll ─────────────────────────── */
+
+.scroll-container {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE / Edge */
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;                  /* Chrome / Safari */
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100%;
+}
+
 /* ─── Typography ─────────────────────────────────────────────────────────── */
 
 h1, h2, h3, h4, h5, h6 {
