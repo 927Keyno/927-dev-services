@@ -13,10 +13,10 @@ const Globe = lazy(() =>
 )
 
 const STATS = [
-  { value: 50, suffix: "+", label: "Projects Completed" },
-  { value: 15, suffix: "+", label: "Servers Built" },
-  { value: 25, suffix: "+", label: "Scripts Deployed" },
-  { value: 100, suffix: "K+", label: "Lines of Code" },
+  { value: 150, suffix: "+", label: "Peak Concurrent Players" },
+  { value: 15, suffix: "K+", prefix: "$", label: "Profit Months on Projects Deployed" },
+  { value: 25, suffix: "+", label: "Custom Scripts Deployed" },
+  { value: 6, suffix: "+", label: "Servers Trusted Us at Scale" },
 ]
 
 export function Stats() {
@@ -34,7 +34,7 @@ export function Stats() {
         )}
       </div>
 
-      <div className="px-8 relative z-10">
+      <div className="px-10 md:px-14 relative z-10">
         <ScrollReveal>
           <span className="text-xs font-medium tracking-widest uppercase text-[var(--color-accent)] mb-4 block">
             By the Numbers
@@ -53,6 +53,7 @@ export function Stats() {
             <ScrollReveal key={stat.label} delay={i * 0.1}>
               <MagicCard className="p-5 text-center" gradientSize={150}>
                 <div className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] mb-1">
+                  {stat.prefix && <span>{stat.prefix}</span>}
                   <NumberTicker value={stat.value} delay={0.3 + i * 0.1} />
                   <span>{stat.suffix}</span>
                 </div>

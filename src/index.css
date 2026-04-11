@@ -106,6 +106,15 @@ body::before {
   min-height: 100%;
 }
 
+/* Hide scrollbar on inner scroll areas (no snap) */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* ─── Typography ─────────────────────────────────────────────────────────── */
 
 h1, h2, h3, h4, h5, h6 {

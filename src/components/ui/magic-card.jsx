@@ -57,7 +57,7 @@ export function MagicCard({
         className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{ background: spotlightBg }}
       />
-      <div className="relative z-10">{children}</div>
+      <div className="relative z-10 flex-1 flex flex-col">{children}</div>
     </motion.div>
   )
 }
